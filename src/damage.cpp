@@ -1,14 +1,18 @@
 #include "damage.h"
 
+#include <cstddef>
+#include <algorithm>
+#include <map>
+#include <numeric>
+#include <utility>
+
 #include "debug.h"
 #include "item.h"
 #include "json.h"
 #include "monster.h"
 #include "mtype.h"
-
-#include <algorithm>
-#include <map>
-#include <numeric>
+#include "translations.h"
+#include "cata_utility.h"
 
 bool damage_unit::operator==( const damage_unit &other ) const
 {
@@ -19,7 +23,7 @@ bool damage_unit::operator==( const damage_unit &other ) const
            damage_multiplier == other.damage_multiplier;
 }
 
-damage_instance::damage_instance() { }
+damage_instance::damage_instance() = default;
 damage_instance damage_instance::physical( float bash, float cut, float stab, float arpen )
 {
     damage_instance d;
@@ -84,9 +88,9 @@ bool damage_instance::empty() const
     return damage_units.empty();
 }
 
-void damage_instance::add( const damage_instance &b )
+void damage_instance::add( const damage_instance &added_di )
 {
-    for( auto &added_du : b.damage_units ) {
+    for( auto &added_du : added_di.damage_units ) {
         add( added_du );
     }
 }
@@ -137,9 +141,15 @@ bool damage_instance::operator==( const damage_instance &other ) const
 
 void damage_instance::deserialize( JsonIn &jsin )
 {
-    JsonObject jo( jsin );
-    // @todo Clean up
-    damage_units = load_damage_instance( jo ).damage_units;
+    // TODO: Clean up
+    if( jsin.test_object() ) {
+        JsonObject jo = jsin.get_object();
+        damage_units = load_damage_instance( jo ).damage_units;
+    } else if( jsin.test_array() ) {
+        damage_units = load_damage_instance( jsin.get_array() ).damage_units;
+    } else {
+        jsin.error( "Expected object or array for damage_instance" );
+    }
 }
 
 dealt_damage_instance::dealt_damage_instance()
@@ -184,7 +194,7 @@ resistances::resistances( const item &armor, bool to_self )
         }
     }
 }
-resistances::resistances( monster &monster )
+resistances::resistances( monster &monster ) : resistances()
 {
     set_resist( DT_BASH, monster.type->armor_bash );
     set_resist( DT_CUT,  monster.type->armor_cut );
@@ -215,16 +225,21 @@ resistances &resistances::operator+=( const resistances &other )
 }
 
 static const std::map<std::string, damage_type> dt_map = {
-    { "true", DT_TRUE },
-    { "biological", DT_BIOLOGICAL },
-    { "bash", DT_BASH },
-    { "cut", DT_CUT },
-    { "acid", DT_ACID },
-    { "stab", DT_STAB },
-    { "heat", DT_HEAT },
-    { "cold", DT_COLD },
-    { "electric", DT_ELECTRIC }
+    { translate_marker_context( "damage type", "true" ), DT_TRUE },
+    { translate_marker_context( "damage type", "biological" ), DT_BIOLOGICAL },
+    { translate_marker_context( "damage type", "bash" ), DT_BASH },
+    { translate_marker_context( "damage type", "cut" ), DT_CUT },
+    { translate_marker_context( "damage type", "acid" ), DT_ACID },
+    { translate_marker_context( "damage type", "stab" ), DT_STAB },
+    { translate_marker_context( "damage type", "heat" ), DT_HEAT },
+    { translate_marker_context( "damage type", "cold" ), DT_COLD },
+    { translate_marker_context( "damage type", "electric" ), DT_ELECTRIC }
 };
+
+const std::map<std::string, damage_type> &get_dt_map()
+{
+    return dt_map;
+}
 
 damage_type dt_by_name( const std::string &name )
 {
@@ -236,12 +251,12 @@ damage_type dt_by_name( const std::string &name )
     return iter->second;
 }
 
-const std::string &name_by_dt( const damage_type &dt )
+std::string name_by_dt( const damage_type &dt )
 {
     auto iter = dt_map.cbegin();
     while( iter != dt_map.cend() ) {
         if( iter->second == dt ) {
-            return iter->first;
+            return pgettext( "damage type", iter->first.c_str() );
         }
         iter++;
     }
@@ -270,7 +285,7 @@ const skill_id &skill_by_dt( damage_type dt )
     }
 }
 
-damage_unit load_damage_unit( JsonObject &curr )
+static damage_unit load_damage_unit( const JsonObject &curr )
 {
     damage_type dt = dt_by_name( curr.get_string( "damage_type" ) );
     if( dt == DT_NULL ) {
@@ -284,13 +299,11 @@ damage_unit load_damage_unit( JsonObject &curr )
     return damage_unit( dt, amount, arpen, armor_mul, damage_mul );
 }
 
-damage_instance load_damage_instance( JsonObject &jo )
+damage_instance load_damage_instance( const JsonObject &jo )
 {
     damage_instance di;
     if( jo.has_array( "values" ) ) {
-        JsonArray jarr = jo.get_array( "values" );
-        while( jarr.has_more() ) {
-            JsonObject curr = jarr.next_object();
+        for( const JsonObject curr : jo.get_array( "values" ) ) {
             di.damage_units.push_back( load_damage_unit( curr ) );
         }
     } else if( jo.has_string( "damage_type" ) ) {
@@ -300,18 +313,17 @@ damage_instance load_damage_instance( JsonObject &jo )
     return di;
 }
 
-damage_instance load_damage_instance( JsonArray &jarr )
+damage_instance load_damage_instance( const JsonArray &jarr )
 {
     damage_instance di;
-    while( jarr.has_more() ) {
-        JsonObject curr = jarr.next_object();
+    for( const JsonObject curr : jarr ) {
         di.damage_units.push_back( load_damage_unit( curr ) );
     }
 
     return di;
 }
 
-std::array<float, NUM_DT> load_damage_array( JsonObject &jo )
+std::array<float, NUM_DT> load_damage_array( const JsonObject &jo )
 {
     std::array<float, NUM_DT> ret;
     float init_val = jo.get_float( "all", 0.0f );
@@ -333,7 +345,7 @@ std::array<float, NUM_DT> load_damage_array( JsonObject &jo )
     return ret;
 }
 
-resistances load_resistances_instance( JsonObject &jo )
+resistances load_resistances_instance( const JsonObject &jo )
 {
     resistances ret;
     ret.resist_vals = load_damage_array( jo );

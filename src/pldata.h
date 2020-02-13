@@ -2,25 +2,15 @@
 #ifndef PLDATA_H
 #define PLDATA_H
 
+#include <string>
+
 #include "calendar.h"
-#include "string_id.h"
+#include "enum_traits.h"
 
 class JsonIn;
 class JsonOut;
 
-class martialart;
-using matype_id = string_id<martialart>;
-
-class ma_buff;
-using mabuff_id = string_id<ma_buff>;
-
-class ma_technique;
-using matec_id = string_id<ma_technique>;
-
-struct mutation_branch;
-using trait_id = string_id<mutation_branch>;
-
-typedef std::string dis_type;
+using dis_type = std::string;
 
 enum character_type : int {
     PLTYPE_CUSTOM,
@@ -35,6 +25,12 @@ enum add_type : int {
     ADD_CAFFEINE, ADD_ALCOHOL, ADD_SLEEP, ADD_PKILLER, ADD_SPEED, ADD_CIG,
     ADD_COKE, ADD_CRACK, ADD_MUTAGEN, ADD_DIAZEPAM, ADD_MARLOSS_R, ADD_MARLOSS_B,
     ADD_MARLOSS_Y,
+    NUM_ADD_TYPES // last
+};
+
+template<>
+struct enum_traits<add_type> {
+    static constexpr add_type last = NUM_ADD_TYPES;
 };
 
 enum hp_part : int {
@@ -47,6 +43,11 @@ enum hp_part : int {
     num_hp_parts
 };
 
+template<>
+struct enum_traits<hp_part> {
+    static constexpr hp_part last = num_hp_parts;
+};
+
 class addiction
 {
     public:
@@ -55,7 +56,7 @@ class addiction
         time_duration sated = 1_hours;
 
         addiction() = default;
-        addiction( add_type const t, int const i = 1 ) : type {t}, intensity {i} { }
+        addiction( add_type const t, const int i = 1 ) : type {t}, intensity {i} { }
 
         void serialize( JsonOut &json ) const;
         void deserialize( JsonIn &jsin );

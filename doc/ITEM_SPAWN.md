@@ -91,6 +91,8 @@ Each entry can have more values (shown above as `...`). They allow further prope
 
 `count` makes the item spawn repeat to create more items, each time creating a new item.
 
+`charges`: Setting only min, not max will make the game calculate the max charges based on container or ammo/magazine capacity. Setting max too high will decrease it to maximum capacity. Not setting min will set it to 0 when max is set.
+
 ```json
 "damage-min": 0,
 "damage-max": 3,
@@ -107,7 +109,7 @@ The container is checked and the item is put inside the container, and the charg
 Here are some ways to make items spawn with/without ammo/magazines (note that `ammo-item` can
 be specified for guns and magazines in the entries array to use a non-default ammo type):
 
-* Secify an ammo/magazine chance (introduced in Section 2) for the entire item group.
+* Specify an ammo/magazine chance (introduced in Section 2) for the entire item group.
   `ammo` specifies the percent chance that the entries will spawn fully loaded (if it needs a magazine, it will be added for you).
   `magazine` specifies the percent chance that the entries will spawn with a magazine.
   Both of these default to 0 if unspecified.
