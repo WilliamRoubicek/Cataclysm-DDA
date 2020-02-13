@@ -1,0 +1,973 @@
+[
+  {
+    "id": "beef_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of beef",
+    "name_plural": "chunks of beef",
+    "description": "Fresh meat from a cow. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/174032/nutrients Values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "beef_cooked",
+    "calories": 740,
+    "vitamins": [
+      [ "vitA", 1 ],
+      [ "vitB", 325 ],
+      [ "vitC", 0],
+      [ "calcium", 4 ],
+      [ "iron", 18 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "beef_scrap",
+    "copy-from": "beef_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of beef",
+    "name_plural": "scraps of beef",
+    "description": "This is a tiny scrap of edible beef.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "beef_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "beef_cooked",
+    "copy-from": "beef_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked beef",
+    "description": "This is a chunk of freshly cooked beef.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "beef_scrap_cooked",
+    "copy-from": "beef_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of beef",
+    "name_plural": "cooked scraps of beef",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "beef_smoked",
+    "copy-from": "beef_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked beef",
+    "description": "Tasty beef that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_beef"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "beef_pickled",
+    "name": "pickled beef",
+    "copy-from": "beef_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned beef.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_beef",
+    "name": "dehydrated beef",
+    "copy-from": "beef_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated beef flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_beef",
+    "name": "rehydrated beef",
+    "copy-from": "beef_cooked",
+    "color": "light_red",
+    "description": "Reconstituted beef, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  {
+    "id": "pork_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of pork",
+    "name_plural": "chunks of pork",
+    "description": "Fresh meat from a pig. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/167820/nutrients Values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "pork_cooked",
+    "calories": 778,
+    "vitamins": [
+      [ "vitA", 1 ],
+      [ "vitB", 83 ],
+      [ "vitC", 2],
+      [ "calcium", 4 ],
+      [ "iron", 14 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "pork_scrap",
+    "copy-from": "pork_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of pork",
+    "name_plural": "scraps of pork",
+    "description": "This is a tiny scrap of edible pork.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "pork_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "pork_cooked",
+    "copy-from": "pork_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked pork",
+    "description": "This is a chunk of freshly cooked pork.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "pork_scrap_cooked",
+    "copy-from": "pork_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of pork",
+    "name_plural": "cooked scraps of pork",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "pork_smoked",
+    "copy-from": "pork_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked pork",
+    "description": "Tasty pork that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_pork"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "pork_pickled",
+    "name": "pickled pork",
+    "copy-from": "pork_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned pork.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_pork",
+    "name": "dehydrated pork",
+    "copy-from": "pork_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated pork flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_pork",
+    "name": "rehydrated pork",
+    "copy-from": "pork_cooked",
+    "color": "light_red",
+    "description": "Reconstituted pork, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  
+  {
+    "id": "chicken_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of chicken",
+    "name_plural": "chunks of chicken",
+    "description": "Fresh meat from a chicken. You could eat it raw, but you probably shouldn't.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/171450/nutrients Values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "chicken_cooked",
+    "calories": 707,
+    "vitamins": [
+      [ "vitA", 16 ],
+      [ "vitB", 33 ],
+      [ "vitC", 0],
+      [ "calcium", 3 ],
+      [ "iron", 20 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "chicken_scrap",
+    "copy-from": "chicken_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of chicken",
+    "name_plural": "scraps of chicken",
+    "description": "This is a tiny scrap of edible chicken.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "chicken_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "chicken_cooked",
+    "copy-from": "chicken_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked chicken",
+    "description": "This is a chunk of freshly cooked chicken.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "chicken_scrap_cooked",
+    "copy-from": "chicken_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of chicken",
+    "name_plural": "cooked scraps of chicken",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "chicken_smoked",
+    "copy-from": "chicken_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked chicken",
+    "description": "Tasty chicken that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_chicken"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "chicken_pickled",
+    "name": "pickled chicken",
+    "copy-from": "chicken_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned chicken.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_chicken",
+    "name": "dehydrated chicken",
+    "copy-from": "chicken_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated chicken flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_chicken",
+    "name": "rehydrated chicken",
+    "copy-from": "chicken_cooked",
+    "color": "light_red",
+    "description": "Reconstituted chicken, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+   {
+    "id": "beaver_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of beaver",
+    "name_plural": "chunks of beaver",
+    "description": "Fresh meat from a beaver. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/337071/nutrients Values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "beaver_cooked",
+    "calories": 624,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 1016 ],
+      [ "vitC", 10],
+      [ "calcium", 5 ],
+      [ "iron", 163 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "beaver_scrap",
+    "copy-from": "beaver_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of beaver",
+    "name_plural": "scraps of beaver",
+    "description": "This is a tiny scrap of edible beaver.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "beaver_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "beaver_cooked",
+    "copy-from": "beaver_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked beaver",
+    "description": "This is a chunk of freshly cooked beaver.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "beaver_scrap_cooked",
+    "copy-from": "beaver_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of beaver",
+    "name_plural": "cooked scraps of beaver",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "beaver_smoked",
+    "copy-from": "beaver_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked beaver",
+    "description": "Tasty beaver that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_beaver"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "beaver_pickled",
+    "name": "pickled beaver",
+    "copy-from": "beaver_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned beaver.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_beaver",
+    "name": "dehydrated beaver",
+    "copy-from": "beaver_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated beaver flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_beavern",
+    "name": "rehydrated beaver",
+    "copy-from": "beaver_cooked",
+    "color": "light_red",
+    "description": "Reconstituted beaver, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  {
+    "id": "venison_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of venison",
+    "name_plural": "chunks of venison",
+    "description": "Fresh meat from a game animal. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/175085/nutrients and https://fdc.nal.usda.gov/fdc-app.html#/food-details/172602/nutrientsValues founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "venison_cooked",
+    "calories": 467,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 229 ],
+      [ "vitC", 0],
+      [ "calcium", 2 ],
+      [ "iron", 73 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "venison_scrap",
+    "copy-from": "venison_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of venison",
+    "name_plural": "scraps of venison",
+    "description": "This is a tiny scrap of edible venison.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "venison_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "venison_cooked",
+    "copy-from": "venison_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked venison",
+    "description": "This is a chunk of freshly cooked venison.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "venison_scrap_cooked",
+    "copy-from": "venison_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of venison",
+    "name_plural": "cooked scraps of venison",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "venison_smoked",
+    "copy-from": "venison_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked venison",
+    "description": "Tasty venison that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_venison"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "venison_pickled",
+    "name": "pickled venison",
+    "copy-from": "venison_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned venison.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_venison",
+    "name": "dehydrated venison",
+    "copy-from": "venison_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated venison flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_venison",
+    "name": "rehydrated venison",
+    "copy-from": "venison_cooked",
+    "color": "light_red",
+    "description": "Reconstituted venison, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  {
+    "id": "dog_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of dog",
+    "name_plural": "chunks of dog",
+    "description": "Fresh meat from man's best friend. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://en.wikipedia.org/wiki/Dog_meat values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "dog_cooked",
+    "calories": 775,
+    "vitamins": [
+      [ "vitA", 1 ],
+      [ "vitB", 0 ],
+      [ "vitC", 10],
+      [ "calcium", 2 ],
+      [ "iron", 45 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "dog_scrap",
+    "copy-from": "dog_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of dog",
+    "name_plural": "scraps of dog",
+    "description": "This is a tiny scrap of edible dog.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "dog_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "dog_cooked",
+    "copy-from": "dog_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked dog",
+    "description": "This is a chunk of freshly cooked dog.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "dog_scrap_cooked",
+    "copy-from": "dog_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of dog",
+    "name_plural": "cooked scraps of dog",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "dog_smoked",
+    "copy-from": "dog_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked dog",
+    "description": "Tasty dog that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_dog"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dog_pickled",
+    "name": "pickled dog",
+    "copy-from": "dog_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned dog.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_dog",
+    "name": "dehydrated dog",
+    "copy-from": "dog_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated dog flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_dog",
+    "name": "rehydrated dog",
+    "copy-from": "dog_cooked",
+    "color": "light_red",
+    "description": "Reconstituted dog, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  {
+    "id": "bear_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of bear",
+    "name_plural": "chunks of bear",
+    "description": "Fresh meat from a bear. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/337065/nutrients values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "bear_cooked",
+    "calories": 763,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 300 ],
+      [ "vitC", 0],
+      [ "calcium", 1 ],
+      [ "iron", 175 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "bear_scrap",
+    "copy-from": "bear_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of bear",
+    "name_plural": "scraps of bear",
+    "description": "This is a tiny scrap of edible bear.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "bear_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "bear_cooked",
+    "copy-from": "bear_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked bear",
+    "description": "This is a chunk of freshly cooked bear.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "bear_scrap_cooked",
+    "copy-from": "bear_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of bear",
+    "name_plural": "cooked scraps of bear",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "bear_smoked",
+    "copy-from": "bear_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked bear",
+    "description": "Tasty bear that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_bear"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "bear_pickled",
+    "name": "pickled bear",
+    "copy-from": "bear_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned bear.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_bear",
+    "name": "dehydrated bear",
+    "copy-from": "bear_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated bear flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_bear",
+    "name": "rehydrated bear",
+    "copy-from": "bear_cooked",
+    "color": "light_red",
+    "description": "Reconstituted bear, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+
+  {
+    "id": "horse_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of horse",
+    "name_plural": "chunks of horse",
+    "description": "Fresh meat from a horse. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/175087/nutrients values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "horse_cooked",
+    "calories": 518,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 389 ],
+      [ "vitC", 6],
+      [ "calcium", 2 ],
+      [ "iron", 82 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "horse_scrap",
+    "copy-from": "horse_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of horse",
+    "name_plural": "scraps of horse",
+    "description": "This is a tiny scrap of edible horse.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "horse_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "horse_cooked",
+    "copy-from": "horse_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked horse",
+    "description": "This is a chunk of freshly cooked horse.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "horse_scrap_cooked",
+    "copy-from": "horse_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of horse",
+    "name_plural": "cooked scraps of horse",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "horse_smoked",
+    "copy-from": "horse_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked horse",
+    "description": "Tasty horse that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_horse"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "horse_pickled",
+    "name": "pickled horse",
+    "copy-from": "horse_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned horse.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_horse",
+    "name": "dehydrated horse",
+    "copy-from": "horse_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated horse flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_horse",
+    "name": "rehydrated horse",
+    "copy-from": "horse_cooked",
+    "color": "light_red",
+    "description": "Reconstituted horse, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  }
+
+]
