@@ -968,6 +968,368 @@
     "price": 900,
     "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
     "fun": 2
+  },
+  {
+    "id": "moose_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of moose",
+    "name_plural": "chunks of moose",
+    "description": "Fresh meat from a moose. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/337064/nutrients values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "moose_cooked",
+    "calories": 393,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 770 ],
+      [ "vitC", 16],
+      [ "calcium", 1 ],
+      [ "iron", 68 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "moose_scrap",
+    "copy-from": "moose_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of moose",
+    "name_plural": "scraps of moose",
+    "description": "This is a tiny scrap of edible moose.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "moose_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "moose_cooked",
+    "copy-from": "moose_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked moose",
+    "description": "This is a chunk of freshly cooked moose.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "moose_scrap_cooked",
+    "copy-from": "moose_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of moose",
+    "name_plural": "cooked scraps of moose",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "moose_smoked",
+    "copy-from": "moose_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked moose",
+    "description": "Tasty moose that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_moose"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "moose_pickled",
+    "name": "pickled moose",
+    "copy-from": "moose_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned moose.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_moose",
+    "name": "dehydrated moose",
+    "copy-from": "moose_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated moose flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_moose",
+    "name": "rehydrated moose",
+    "copy-from": "moose_cooked",
+    "color": "light_red",
+    "description": "Reconstituted moose, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+  {
+    "id": "sheep_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of mutton",
+    "name_plural": "chunks of mutton",
+    "description": "Fresh mutton chops from a sheep. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/172480/nutrients values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "sheep_cooked",
+    "calories": 870,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 312 ],
+      [ "vitC", 0],
+      [ "calcium", 4 ],
+      [ "iron", 30 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "sheep_scrap",
+    "copy-from": "sheep_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of mutton",
+    "name_plural": "scraps of mutton",
+    "description": "This is a tiny scrap of edible mutton.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "sheep_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "sheep_cooked",
+    "copy-from": "sheep_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked mutton",
+    "description": "This is a chunk of freshly cooked mutton.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "sheep_scrap_cooked",
+    "copy-from": "sheep_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of mutton",
+    "name_plural": "cooked scraps of mutton",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "sheep_smoked",
+    "copy-from": "sheep_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked mutton",
+    "description": "Tasty mutton that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_sheep"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "sheep_pickled",
+    "name": "pickled mutton",
+    "copy-from": "sheep_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned mutton.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_sheep",
+    "name": "dehydrated mutton",
+    "copy-from": "sheep_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated mutton flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_sheep",
+    "name": "rehydrated mutton",
+    "copy-from": "sheep_cooked",
+    "color": "light_red",
+    "description": "Reconstituted mutton, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
+  },
+
+   {
+    "id": "raccoon_meat",
+    "type": "COMESTIBLE",
+    "copy-from": "meat",
+    "name": "chunk of raccoon",
+    "name_plural": "chunks of raccoon",
+    "description": "Fresh meat from a raccoon. You could eat it raw, but cooking it is better.",
+    "looks_like": "meat",
+    "//": "Nutrition information found here https://fdc.nal.usda.gov/fdc-app.html#/food-details/337072/nutrients values founded by multiplying values taken at 100 grams by 2.96 grams to get the correct numbers for a serving at 296 grams.",
+    "cooks_like": "raccoon_cooked",
+    "calories": 751,
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitB", 1016 ],
+      [ "vitC", 0],
+      [ "calcium", 3 ],
+      [ "iron", 116 ]
+    ],
+    "flags": [ "SMOKABLE", "RAW" ]
+  },
+
+  {
+    "id": "raccoon_scrap",
+    "copy-from": "raccoon_meat",
+    "type": "COMESTIBLE",
+    "name": "scrap of raccoon",
+    "name_plural": "scraps of raccoon",
+    "description": "This is a tiny scrap of edible raccoon.  It's not much, but it'll do in a pinch.",
+    "cooks_like": "raccoon_scrap_cooked",
+    "proportional": {
+      "weight": 0.1,
+      "volume": 0.1,
+      "price": 0.1,
+      "calories": 0.1
+    },
+    "delete": { "flags": [ "SMOKABLE" ] },
+    "vitamins": [
+      [ "vitA", 0 ],
+      [ "vitC", 0 ],
+      [ "calcium", 0 ],
+      [ "iron", 0 ],
+      [ "vitB", 0 ]
+    ]
+  },
+
+  {
+    "id": "raccoon_cooked",
+    "copy-from": "raccoon_meat",
+    "type": "COMESTIBLE",
+    "name": "cooked raccoon",
+    "description": "This is a chunk of freshly cooked raccoon.  It's filling and nutritious, but unseasoned and a bit bland.",
+    "price": 750,
+    "parasites": 0,
+    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "raccoon_scrap_cooked",
+    "copy-from": "raccoon_scrap",
+    "type": "COMESTIBLE",
+    "name": "cooked scrap of raccoon",
+    "name_plural": "cooked scraps of raccoon",
+    "parasites": 0,
+    "fun": 0,
+    "healthy": 0,
+    "flags": [ "NUTRIENT_OVERRIDE" ]
+  },
+  {
+    "id": "raccoon_smoked",
+    "copy-from": "raccoon_cooked",
+    "type": "COMESTIBLE",
+    "name": "smoked raccoon",
+    "description": "Tasty raccoon that has been heavily smoked for preservation.  It could be further smoked to dehydrate it completely.",
+    "color": "brown",
+    "spoils_in": "24 days",
+    "quench": -1,
+    "fun": 5,
+    "flags": [ "EATEN_HOT", "SMOKED", "SMOKABLE" ],
+    "smoking_result": "dry_raccoon"
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "raccoon_pickled",
+    "name": "pickled raccoon",
+    "copy-from": "raccoon_cooked",
+    "color": "pink",
+    "spoils_in": "4 days",
+    "container": "jar_glass",
+    "healthy": 1,
+    "description": "This is a serving of crisply brined and canned raccoon.  Tasty and nutritious.",
+    "price": 250,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 6
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "dry_raccoon",
+    "name": "dehydrated raccoon",
+    "copy-from": "raccoon_cooked",
+    "weight": "85 g",
+    "color": "red",
+    "spoils_in": "360 days",
+    "quench": -3,
+    "description": "Dehydrated raccoon flakes.  With proper storage, this dried food will remain edible for an incredibly long time.",
+    "price": 900,
+    "material": "flesh",
+    "primary_material": "cured_meat",
+    "volume": "125 ml",
+    "flags": [ "EDIBLE_FROZEN" ]
+  },
+  {
+    "type": "COMESTIBLE",
+    "id": "rehydrated_raccoon",
+    "name": "rehydrated raccoon",
+    "copy-from": "raccoon_cooked",
+    "color": "light_red",
+    "description": "Reconstituted raccoon, which are much more enjoyable to eat now that they have been rehydrated.",
+    "price": 900,
+    "delete": { "flags": [ "NUTRIENT_OVERRIDE" ] },
+    "fun": 2
   }
 
 ]
