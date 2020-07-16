@@ -1,31 +1,34 @@
+#include <algorithm>
+#include <cassert>
+#include <functional>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
-#include <algorithm>
-#include <functional>
 
 #include "avatar.h"
 #include "coordinate_conversions.h"
+#include "debug.h"
 #include "dialogue.h"
+#include "enum_conversions.h"
 #include "enums.h"
-#include "json.h"
-#include "mission.h"
 #include "game.h"
+#include "json.h"
+#include "line.h"
+#include "map_iterator.h"
 #include "mapgen_functions.h"
 #include "messages.h"
-#include "map_iterator.h"
+#include "mission.h"
 #include "npc.h"
-#include "npctalk.h"
-#include "overmap.h"
-#include "overmapbuffer.h"
-#include "rng.h"
-#include "debug.h"
-#include "line.h"
 #include "omdata.h"
 #include "optional.h"
+#include "overmap.h"
+#include "overmapbuffer.h"
+#include "point.h"
+#include "rng.h"
+#include "talker.h"
 #include "translations.h"
 #include "type_id.h"
-#include "point.h"
 
 static tripoint reveal_destination( const std::string &type )
 {
@@ -518,12 +521,13 @@ bool mission_type::parse_funcs( const JsonObject &jo, std::function<void( missio
     talk_effects.load_effect( jo );
     phase_func = [ funcs, talk_effects ]( mission * miss ) {
         ::dialogue d;
-        d.beta = g->find_npc( miss->get_npc_id() );
+        npc *beta = g->find_npc( miss->get_npc_id() );
         standard_npc default_npc( "Default" );
-        if( d.beta == nullptr ) {
-            d.beta = &default_npc;
+        if( beta == nullptr ) {
+            beta = &default_npc;
         }
-        d.alpha = &g->u;
+        d.alpha = get_talker_for( g->u );
+        d.beta = get_talker_for( beta );
         for( const talk_effect_fun_t &effect : talk_effects.effects ) {
             effect( d );
         }
